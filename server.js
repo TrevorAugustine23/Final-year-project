@@ -3,10 +3,12 @@ const express = require('express');
 const connectDB = require("./config/db");
 
 
+
 //Connect DB
 connectDB();
 
 const app = express();
+
 
 app.use(express.json());
 

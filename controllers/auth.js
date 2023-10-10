@@ -34,7 +34,7 @@ exports.login = async (req, res, next) => {
         const isMatch = await user.matchPasswords(password);
 
         if(!isMatch) {
-            return next(new ErrorResponse("Invalid credentials", 401))
+            return next(new ErrorResponse("Invalid credentials", 401));
         }
         sendToken(user, 200, res); 
     }catch (error) {
@@ -50,6 +50,6 @@ exports.resetpassword = (req, res, next) => {
 };
 
 const sendToken = (user, statusCode, res) => {
-    const token = user.getSignToken();
-    res.status(statusCode).json({ success: true, token})
+    const token = user.getSignedToken();
+    res.status(statusCode).json({ success: true, token});
 };

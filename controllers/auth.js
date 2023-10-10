@@ -12,7 +12,8 @@ exports.register = async function (req, res) {
 
         res.status(201).json({
             success: true,
-            user,
+            token : "keyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+            
         });
         // next();
     } catch (error) {

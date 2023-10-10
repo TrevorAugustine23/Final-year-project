@@ -10,12 +10,7 @@ exports.register = async function (req, res) {
             password
         });
 
-        res.status(201).json({
-            success: true,
-            token : "keyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-            
-        });
-        // next();
+        sendToken(user, 201, res);
     } catch (error) {
         next(error);
     }
@@ -41,10 +36,7 @@ exports.login = async (req, res, next) => {
         if(!isMatch) {
             return next(new ErrorResponse("Invalid credentials", 401))
         }
-        res.status(200).json({
-            success: true,
-            token : "keyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-        });
+        sendToken(user, 200, res); 
     }catch (error) {
         res.status(500).json({ success: false, error: error.message })
     }
@@ -55,4 +47,9 @@ exports.forgotpassword = (req, res, next) => {
 };
 exports.resetpassword = (req, res, next) => {
     res.send("Reset Password Route");
+};
+
+const sendToken = (user, statusCode, res) => {
+    const token = user.getSignToken();
+    res.status(statusCode).json({ success: true, token})
 };
